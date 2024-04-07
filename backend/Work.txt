@@ -1,0 +1,8 @@
+Task in backend 
+1. Minimum Content in index.js
+2. Adding router 
+3. Adding controller
+4. Adding models 
+
+
+1st for the menu card of the mess
