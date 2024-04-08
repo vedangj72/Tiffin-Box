@@ -22,6 +22,26 @@ const userAdd = async(req, res) => {
     }
 };
 
+const verifyUser = async(req, res) => {
+    try {
+        const { phone, name } = req.body || {};
+        if (!phone || !name) {
+            return res.status(400).send('Please provide phone number and name for verification');
+        }
+
+        // Check if a user with the provided phone number and name exists in the database
+        const existingUser = await User.findOne({ phone, name });
+        if (!existingUser) {
+            return res.status(404).send('User not found');
+        }
+
+        // User exists, send a success response
+        res.status(200).send('User verified successfully');
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
 const userList = async(req, res) => {
     try {
         const users = await User.find();
@@ -32,4 +52,4 @@ const userList = async(req, res) => {
     }
 };
 
-module.exports = { userAdd, userList };
+module.exports = { userAdd, userList, verifyUser };
