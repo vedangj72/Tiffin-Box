@@ -6,7 +6,7 @@ const menu = new mongoose.Schema({
     },
     sabji: {
         type: String,
-        require: true,
+        required: true,
     },
     sabjialternative: {
         type: String,

@@ -4,6 +4,8 @@ const Url = require('./configure.js');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const routerMenu = require('./Routes/routerMenu');
+const routerUsers = require('./Routes/routerUser');
+const routerFeedback = require('./Routes/routerFeedback');
 const port = process.env.PORT || 3000; // Default port 3000 if PORT environment variable is not set
 
 mongoose.connect(Url)
@@ -19,3 +21,5 @@ mongoose.connect(Url)
 
 app.use(express.json());
 app.use('/', routerMenu);
+app.use('/', routerUsers);
+app.use('/', routerFeedback);
