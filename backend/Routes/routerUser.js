@@ -4,6 +4,5 @@ const { userAdd, userList, verifyUser } = require('../Controllers/controllerUser
 
 routerUser.get('/home/user', userList);
 routerUser.post('/home/user', userAdd);
-
 routerUser.post('/home/user/login', verifyUser);
 module.exports = routerUser;
