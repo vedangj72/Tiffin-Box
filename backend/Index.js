@@ -6,7 +6,12 @@ require('dotenv').config();
 const routerMenu = require('./Routes/routerMenu');
 const routerUsers = require('./Routes/routerUser');
 const routerFeedback = require('./Routes/routerFeedback');
-const port = process.env.PORT || 3000; // Default port 3000 if PORT environment variable is not set
+const port = process.env.PORT;
+const cors = require('cors')
+
+const corsoption = {
+    origin: "*"
+};
 
 mongoose.connect(Url)
     .then(() => {
@@ -18,8 +23,11 @@ mongoose.connect(Url)
     .catch(err => {
         console.error('Error connecting to DB:', err);
     });
-
+app.use(cors(corsoption));
 app.use(express.json());
 app.use('/', routerMenu);
 app.use('/', routerUsers);
 app.use('/', routerFeedback);
+app.use((req, res) => {
+    res.status(404).send("error page please select right url ");
+})

@@ -13,12 +13,12 @@ const menuList = async(req, res) => {
 
 const menuAdd = async(req, res) => {
     try {
-        const { description, sabji, sabjialternative, special } = req.body || {};
+        const { description, sabji, sabjialternative } = req.body || {};
         const desp = await Menu.findOne({ description });
         if (desp) {
             return res.status(400).send('Add the Description');
         }
-        const menu = await Menu.create({ description, sabji, sabjialternative, special });
+        const menu = await Menu.create({ description, sabji, sabjialternative });
         res.status(200).send(`menu created successfully ${menu}`);
     } catch (error) {
         res.status(401).send('Error creating menu' + error);

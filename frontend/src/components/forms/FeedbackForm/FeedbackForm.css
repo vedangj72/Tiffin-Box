@@ -1,0 +1,27 @@
+.feedback-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}

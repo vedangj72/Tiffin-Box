@@ -5,20 +5,19 @@ const userAdd = async(req, res) => {
     try {
         const { name, age, phone, college, address, sub, payed, dateend, datestart } = req.body || {};
         if (!phone || !sub || !payed || !datestart || !dateend) {
-            return res.status(400).send('Please provide all required fields: phone, sub, payed, datestart, dateend');
+            return res.status(400).json({ success: false, message: 'Please provide all required fields: phone, sub, payed, datestart, dateend' });
         }
 
-        // Check if the phone number already exists in the database
         const existingUser = await User.findOne({ phone });
         if (existingUser) {
-            return res.status(400).send('User with this phone number already exists');
+            return res.status(400).json({ success: false, message: 'User with this phone number already exists' });
         }
 
         const user = await User.create({ name, age, phone, college, address, sub, payed, dateend, datestart });
-        res.status(200).send(`User created successfully: ${user}`);
+        res.status(200).json(user);
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 };
 
@@ -26,29 +25,28 @@ const verifyUser = async(req, res) => {
     try {
         const { phone, name } = req.body || {};
         if (!phone || !name) {
-            return res.status(400).send('Please provide phone number and name for verification');
+            return res.status(400).json({ success: false, message: 'Please provide phone number and name for verification' });
         }
 
-        // Check if a user with the provided phone number and name exists in the database
         const existingUser = await User.findOne({ phone, name });
         if (!existingUser) {
-            return res.status(404).send('User not found');
+            return res.status(404).json({ success: false, message: 'User not found' });
         }
 
-        // User exists, send a success response
-        res.status(200).send('User verified successfully');
+        res.status(200).json({ success: true, message: 'User verified successfully' });
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
     }
 };
+
 const userList = async(req, res) => {
     try {
         const users = await User.find();
-        res.status(200).send(users);
+        res.status(200).json(users);
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Internal Server Error');
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Error in fetching data' });
     }
 };
 

@@ -10,9 +10,6 @@ const menu = new mongoose.Schema({
     },
     sabjialternative: {
         type: String,
-    },
-    special: {
-        type: String,
     }
 }, { timestamps: true });
 const Menu = mongoose.model('Menu', menu);
