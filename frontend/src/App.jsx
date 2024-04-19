@@ -15,6 +15,8 @@ import ViewFeedback from './components/Owner/ViewFeedback';
 import Addmenu from './components/forms/Addmenu/Addmenu';
 import Menu from './view/Menu.jsx/Menu';
 import Absenty from './view/Home/Absenty';
+import Subscription from './view/Home/Subscription';
+import User from './components/Owner/User';
 
 
 
@@ -24,12 +26,14 @@ function App() {
       <Route path='/login' element={<Login/>}></Route>
       <Route path='/home' element={<Protected Component={ Home}/>}></Route>
        <Route path='/absenty' element={<Protected Component={ Absenty}/>}></Route>
+       <Route path='/subscription' element={<Protected Component={ Subscription}/>}></Route>
       <Route path='/menu' element={<Protected Component={ Menu}/>}></Route>
       <Route path='/feedbackform' element={<Protected Component={FeedbackForm}/>}></Route>
       <Route path='/ownerPage' element={<NavigationOwner/>}>
         <Route path='userAdd' element={<UserAdd/>}></Route> 
         <Route path='seeFeedback' element={<ViewFeedback/>}></Route> 
         <Route path='addMenu' element={<Addmenu/>}></Route> 
+        <Route path='allusers' element={<User/>}></Route> 
       </Route>
     </Route>
   ))

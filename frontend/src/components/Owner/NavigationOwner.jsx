@@ -4,25 +4,29 @@ import { Nav, Container } from 'react-bootstrap';
 
 function NavigationOwner() {
   return (
-    <header className="py-3">
-      <Container className="d-flex justify-content-center">
-        <Nav  defaultActiveKey="/ownerPage/userAdd" className="flex-column">
-          <Nav.Item>
-            <Nav.Link  as={NavLink} to="/ownerPage/userAdd" >Add User</Nav.Link>
+    <div>
+      <header className="py-2">
+      <Container className="d-flex justify-content-between align-items-center">
+        <Nav variant="pills" defaultActiveKey="/ownerPage/userAdd" className="flex-column m-4">
+        <Nav.Item className="m-1">
+            <Nav.Link as={NavLink} to="/ownerPage/allusers" className="text">Users</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-            <Nav.Link  as={NavLink} to="/ownerPage/seeFeedback" >Feedback</Nav.Link>
+          <Nav.Item className="m-1">
+            <Nav.Link as={NavLink} to="/ownerPage/userAdd" className="text">Add User</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-            <Nav.Link  as={NavLink} to="/ownerPage/addMenu" >Add Menu</Nav.Link>
+          <Nav.Item className="m-1">
+            <Nav.Link as={NavLink} to="/ownerPage/seeFeedback" className="">Feedback</Nav.Link>
+          </Nav.Item>
+          <Nav.Item className="m-1">
+            <Nav.Link as={NavLink} to="/ownerPage/addMenu" className="text">Add Menu</Nav.Link>
           </Nav.Item>
         </Nav>
-        
       </Container>
-      <main>
-        <Outlet/>
-      </main>
     </header>
+      <main className=' mt-2'>
+        <Outlet />
+      </main>
+    </div>
   );
 }
 

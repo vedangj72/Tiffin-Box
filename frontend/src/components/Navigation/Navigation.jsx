@@ -5,8 +5,8 @@ import { Nav } from 'react-bootstrap';
 function Navigator() {
   return (
     <div>
-      <header > 
-        <Nav variant="pills" defaultActiveKey="/home">
+      <header style={{backgroundColor:"#ffc30099", height:"40px"}}> 
+        <Nav variant="tabs" defaultActiveKey="/home">
           <Nav.Item>
             <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
           </Nav.Item>
