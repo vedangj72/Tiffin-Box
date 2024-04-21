@@ -1,21 +1,22 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { setData } from '../../components/app/exceedSlice';
+// import { setData } from '../../components/app/exceedSlice';
+import axios from 'axios';
 
 function Absenty() {
-    const { name, phone } = useSelector(state => state.user.user); // Accessing user data from userSlice
-    // console.log("Name:", name, "Phone:", phone); // Log the values for debugging
-    const { register, handleSubmit } = useForm();
-    const dispatch = useDispatch();
+    const { register, handleSubmit, reset } = useForm();
+    // const dispatch = useDispatch();
 
-    const onSubmit = data => {
-        if (name && phone) {
-            alert("Request added");
-            dispatch(setData({ name, phone, exceed: data.exceed }));
-        } else {
-            console.log("Name or phone is undefined.");
-            
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post("http://localhost:7000/home/query", data);
+            if (response) {
+                alert("Data sent Successfully");
+                reset();
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -23,7 +24,9 @@ function Absenty() {
         <div>
             <h1>Form Here</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="number" {...register('exceed', { required: true })} />
+                <input type="text" placeholder="Name" {...register('name', { required: true })} />
+                <input type="number" placeholder="Phone" {...register('phone', { required: true })} />
+                <input type="number" placeholder="Exceed" {...register('exceed', { required: true })} />
                 <button type="submit">Submit</button>
             </form>
         </div>

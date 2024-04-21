@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/bootstrap-icons/font/bootstrap-icons.css';
 // import FeedbackForm from './components/forms/FeedbackForm';
 import {createBrowserRouter,RouterProvider, createRoutesFromElements,Routes,Route}from 'react-router-dom';
 import Navigator from './components/Navigation/Navigation';
@@ -17,6 +18,7 @@ import Menu from './view/Menu.jsx/Menu';
 import Absenty from './view/Home/Absenty';
 import Subscription from './view/Home/Subscription';
 import User from './components/Owner/User';
+import Updates from './components/Owner/Updates';
 
 
 
@@ -34,6 +36,7 @@ function App() {
         <Route path='seeFeedback' element={<ViewFeedback/>}></Route> 
         <Route path='addMenu' element={<Addmenu/>}></Route> 
         <Route path='allusers' element={<User/>}></Route> 
+        <Route path='allupdates' element={<Updates/>}></Route> 
       </Route>
     </Route>
   ))

@@ -20,6 +20,9 @@ function NavigationOwner() {
           <Nav.Item className="m-1">
             <Nav.Link as={NavLink} to="/ownerPage/addMenu" className="text">Add Menu</Nav.Link>
           </Nav.Item>
+          <Nav.Item className="m-1">
+            <Nav.Link as={NavLink} to="/ownerPage/allupdates" className="text">New Update</Nav.Link>
+          </Nav.Item>
         </Nav>
       </Container>
     </header>

@@ -8,7 +8,7 @@ function Home() {
   const { userData, loading } = useHomeData('http://localhost:7000/home/user');
   const navigate = useNavigate();
   const { name, phone, payed, Datestart, Dateend } = useSelector(state => state.subincrease);
-  console.log('Redux State:', name, phone, Datestart, Dateend, payed); 
+  // console.log('Redux State:', name, phone, Datestart, Dateend, payed); 
 
   if (loading) {
     return (
@@ -32,7 +32,7 @@ function Home() {
           <Button variant="outline-primary" style={{ width: "200px" }} onClick={handleNavigate}>Inform absenty</Button>
         </div>
         <div className='mt-2'>
-          <Button variant="outline-primary" style={{ width: "200px" }} onClick={handleSub}>Add subscription</Button>
+          {/* <Button variant="outline-primary" style={{ width: "200px" }} onClick={handleSub}>Add subscription</Button> */}
         </div>
       </div>
       <Card style={{ width: '28rem', height:"18rem",fontSize:"25px",backgroundColor:"#ffc30099"}} className='mx-auto p-3'>

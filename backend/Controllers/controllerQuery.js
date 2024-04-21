@@ -3,9 +3,9 @@ const Query = require('../Models/modelQuery.js');
 
 const postQuery = async(req, res) => {
     try {
-        const { exceed } = req.body || {};
+        const { exceed, name, phone } = req.body || {};
         if (exceed >= 5) {
-            const newquery = await Query.create({ exceed });
+            const newquery = await Query.create({ exceed, name, phone });
             res.status(200).send(`Query created successfully ${newquery}`);
         } else {
             res.status(404).send("The days must be greater than or equal to 5");
@@ -25,4 +25,20 @@ const queryList = async(req, res) => {
         res.status(400).send(error);
     }
 }
-module.exports = { queryList, postQuery };
+const queryDelete = async(req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedQuery = await Query.findByIdAndDelete(id);
+
+        if (!deletedQuery) {
+            return res.status(404).send("Query not found");
+        }
+
+        res.status(200).send("Query deleted successfully");
+    } catch (error) {
+        console.log(`Error in queryDelete: ${error}`);
+        res.status(400).send(error);
+    }
+};
+
+module.exports = { queryList, postQuery, queryDelete };
