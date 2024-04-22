@@ -6,6 +6,7 @@ import { loginSuccess } from '../app/userSlice';
 function Protected(props) {
   const { Component } = props;
   const isLoggedIn = useSelector(state => state.user.isloggedIn);
+  // console.log("The logged in status",isLoggedIn);
   const User = useSelector(state => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -1,25 +1,25 @@
-import React from 'react'
+import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../../app/userSlice';
 import { useNavigate } from 'react-router-dom';
-
+import "../../forms/Login/login.css"; 
 
 function Login() {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
-  const navigate=useNavigate();
-  const submitlogin = async (data) => {
+  const navigate = useNavigate();
+  // const [phone,setphone]=useState();
+
+  const submitLogin = async (data) => {
     try {
-      const loginresponse = await axios.post("http://localhost:7000/home/user/login", data);
+      const loginResponse = await axios.post("http://localhost:7000/home/user/login", data);
       console.log(data);
-      if (loginresponse.data.success) {
-        alert(`User ${data.name} logged in successfully`);
+      if (loginResponse.data.success) {
+         alert(`User ${data.name} logged in successfully`);
         console.log(`User ${data.name} logged in successfully`);
         navigate('/home');
-
-        // console.log(loginresponse.data.success);
         dispatch(loginSuccess(data));
       } else {
         alert(`Login failed for user ${data.name}`);
@@ -30,25 +30,24 @@ function Login() {
     }
   }
   
-  
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit(submitlogin)}>
+    <div className='login-container mt-5'>
+      <h1 className='header'>Login</h1>
+      <form className='login-form' onSubmit={handleSubmit(submitLogin)}>
         <div>
-          <label>Name:</label>
+          <label className=' text-start m-2'>Name:</label>
           <input type="text" {...register('name', { required: true })} />
         </div>
         <div>
-          <label>Phone No:</label>
-          <input type="integer" {...register('phone', { required: true })} />
+          <label className=' text-start m-2'>Phone No:</label>
+          <input type="tel" {...register('phone', { required: true })}  />
         </div>
-        <div>
-          <button type="submit">Login</button>
+        <div className=' mb-3'>
+          <button type="submit"   className=' mb-3'>Login</button>
         </div>
       </form>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
