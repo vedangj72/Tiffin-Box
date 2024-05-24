@@ -49,6 +49,27 @@ const userList = async(req, res) => {
         res.status(500).json({ success: false, message: 'Error in fetching data' });
     }
 };
+const userById = async(req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Check if the provided ID is a valid MongoDB ObjectId
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ success: false, message: 'Invalid user ID' });
+        }
+
+        // Find the user by ID
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        res.status(200).json({ success: true, data: user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+};
 
 const userUpdate = async(req, res) => {
     try {
@@ -63,7 +84,6 @@ const userUpdate = async(req, res) => {
         if (!existingUser) {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
-
 
         if (name) existingUser.name = name;
         if (phone) existingUser.phone = phone;
@@ -104,4 +124,4 @@ const userDelete = async(req, res) => {
 };
 
 
-module.exports = { userAdd, userList, verifyUser, userUpdate, userDelete };
+module.exports = { userAdd, userList, verifyUser, userUpdate, userDelete, userById };

@@ -4,10 +4,6 @@ const feedback = new mongoose.Schema({
         type: String,
         required: true,
     },
-    dateend: {
-        type: Date,
-        required: true,
-    },
     phone: {
         type: Number,
         required: true,

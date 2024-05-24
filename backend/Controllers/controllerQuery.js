@@ -3,9 +3,9 @@ const Query = require('../Models/modelQuery.js');
 
 const postQuery = async(req, res) => {
     try {
-        const { exceed, name, phone } = req.body || {};
+        const { exceed, name, phone, reason } = req.body || {};
         if (exceed >= 5) {
-            const newquery = await Query.create({ exceed, name, phone });
+            const newquery = await Query.create({ exceed, name, phone, reason });
             res.status(200).send(`Query created successfully ${newquery}`);
         } else {
             res.status(404).send("The days must be greater than or equal to 5");

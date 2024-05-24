@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const Url = require('./configure.js');
+const { localUrl, atlasUrl } = require('./configure.js');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const routerMenu = require('./Routes/routerMenu');
@@ -14,7 +14,7 @@ const corsoption = {
     origin: "*"
 };
 
-mongoose.connect(Url)
+mongoose.connect(atlasUrl)
     .then(() => {
         console.log('Connected to DB');
         app.listen(port, () => {

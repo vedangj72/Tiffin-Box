@@ -24,7 +24,7 @@ function Protected(props) {
     <div>
       {isLoggedIn ? (
         <div>
-          <h1 className=' text-end  m-2'>Welcome {User.user.name}</h1>
+          <h1 className=' text-end  m-2 text-light'>Welcome {User.user.name}</h1>
           <Component /> 
         </div>
       ) : null}

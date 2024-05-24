@@ -1,17 +1,24 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import './FeedbackForm.css'; // Import your CSS file
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import { useSelector } from 'react-redux';
 
 function FeedbackForm() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const userData=useSelector(state=>state.user);
 
-  const onSubmit = async (data) => {
+
+  const onSubmit = async (formdata) => {
     try {
+      const data={
+        ...formdata,
+        ...userData.user,
+      }
       const response = await axios.post("http://localhost:7000/home/feedback", data);
       console.log(`Data sent successfully ${response}`);
       if (response) {
-        alert(`Response sent from ${data.name}`);
+        alert(`Feedback sent successfully`);
         reset();
       }
     } catch (error) {
@@ -20,43 +27,34 @@ function FeedbackForm() {
   };
 
   return (
-    <div className="container">
-      <h1 className="text-center">Feedback Form</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="row mb-3">
-          <label htmlFor="inputName" className="col-sm-2 col-form-label">Name:</label>
-          <div className="col-sm-10">
-            <input type="text" className="form-control" id="inputName" {...register('name', { required: true })} />
-            {errors.name && <span className="error-message">This field is required</span>}
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card">
+            <div className="card-header">
+              <h3 className="text-center">Feedback Form</h3>
+            </div>
+            <div className="card-body">
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="form-group mb-3">
+                  <label htmlFor="inputFeedback">Feedback:</label>
+                  <textarea
+                    className="form-control"
+                    id="inputFeedback"
+                    rows="3"
+                    placeholder="Enter your feedback"
+                    {...register('feedback', { required: true })}
+                  ></textarea>
+                  {errors.feedback && <span className="text-danger">This field is required</span>}
+                </div>
+                <div className="form-group text-center">
+                  <button type="submit" className="btn btn-primary w-100">Submit</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-        <div className="row mb-3">
-          <label htmlFor="inputDateEnd" className="col-sm-2 col-form-label">Date End:</label>
-          <div className="col-sm-10">
-            <input type="date" className="form-control" id="inputDateEnd" {...register('dateend', { required: true })} />
-            {errors.dateend && <span className="error-message">This field is required</span>}
-          </div>
-        </div>
-        <div className="row mb-3">
-          <label htmlFor="inputPhone" className="col-sm-2 col-form-label">Phone:</label>
-          <div className="col-sm-10">
-            <input type="tel" className="form-control" id="inputPhone" {...register('phone', { required: true, pattern: /^\d{10}$/ })} />
-            {errors.phone && <span className="error-message">Enter a valid 10-digit phone number</span>}
-          </div>
-        </div>
-        <div className="row mb-3">
-          <label htmlFor="inputFeedback" className="col-sm-2 col-form-label">Feedback:</label>
-          <div className="col-sm-10">
-            <textarea className="form-control" id="inputFeedback" rows="3" {...register('feedback', { required: true })}></textarea>
-            {errors.feedback && <span className="error-message">This field is required</span>}
-          </div>
-        </div>
-        <div className="row mb-3">
-          <div className="col-sm-10 offset-sm-2">
-            <button type="submit" className="btn btn-primary">Submit</button>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }

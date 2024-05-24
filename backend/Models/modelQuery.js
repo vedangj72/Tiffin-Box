@@ -8,7 +8,10 @@ const query = new mongoose.Schema({
     },
     exceed: {
         type: Number,
+    },
+    reason: {
+        type: String,
     }
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('Query', query);

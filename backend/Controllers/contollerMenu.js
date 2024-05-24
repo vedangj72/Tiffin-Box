@@ -28,20 +28,22 @@ const menuAdd = async(req, res) => {
     }
 }
 
-const deleteOldMenuItems = async() => {
+const deleteOldMenuItems = async(req, res) => {
     try {
         const oneDayAgo = new Date();
-        oneDayAgo.setDate(oneDayAgo.getDate() - 1); // Subtract 1 day
+        oneDayAgo.setDate(oneDayAgo.getDate() - 3); // Subtract 1 day
 
         // Delete menu items older than one day
         await Menu.deleteMany({ createdAt: { $lt: oneDayAgo } });
-        console.log('Old menu items deleted successfully');
+        // console.log('Old menu items deleted successfully');
+        const menu = await Menu.find();
+        res.status(200).send(menu);
     } catch (error) {
         console.error('Error deleting old menu items:', error);
     }
 }
 
-// Schedule the deletion of old menu items once a day (e.g., using a cron job or a scheduler)
+
 setInterval(deleteOldMenuItems, 24 * 60 * 60 * 1000); // Run every 24 hours
 
 module.exports = { menuAdd, menuList, deleteOldMenuItems };
