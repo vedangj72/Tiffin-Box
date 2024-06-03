@@ -29,7 +29,7 @@ function Login() {
         console.log(`User ${data.name} logged in successfully`);
         // Save user data to local storage
         localStorage.setItem('user', JSON.stringify(data));
-        dispatch(loginSuccess(data));
+        dispatch(loginSuccess(data.email));
         navigate('/home');
       } else {
         alert(`Login failed for user ${data.name}`);

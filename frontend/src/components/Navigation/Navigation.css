@@ -1,0 +1,7 @@
+.main-content {
+    flex: 1;
+    background-image: url('../../asset/logo-no-background.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}

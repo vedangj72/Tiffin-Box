@@ -4,6 +4,7 @@ import { Nav, Navbar } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../app/userSlice';
 import Logo from "../../asset/logo-color.png";
+import './Navigation.css'; // Import th e CSS file
 
 function Navigator() {
   const { isloggedIn } = useSelector(state => state.user);
@@ -38,7 +39,7 @@ function Navigator() {
           )}
         </Navbar.Collapse>
       </Navbar>
-      <main style={{ flex: 1 }}>
+      <main className="main-content">
         <Outlet />
       </main>
       {/* <footer style={{ backgroundColor: "rgb(233 237 234)", height: "150px", display: "flex", justifyContent: "center", alignItems: "center" }}>
